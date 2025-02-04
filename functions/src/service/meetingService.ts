@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import { CloudTasksClient, protos } from "@google-cloud/tasks";
 import { WebClient } from "@slack/web-api";
-import { SLACK_BOT_TOKEN, SLACK_TARGET_CHANNEL } from "../const";
+import dayjs from "dayjs";
+import { SLACK_BOT_TOKEN } from "../const";
 import { postMessage } from "./slackService";
-import dayjs = require("dayjs");
 
 import { getFirestore } from "firebase-admin/firestore";
 
@@ -25,7 +25,7 @@ export const createSuddenMeeting = async (channel?: string) => {
       const web = new WebClient(SLACK_BOT_TOKEN);
 
       const membersResponse = await web.conversations.members({
-        channel: channel ?? SLACK_TARGET_CHANNEL,
+        channel: channel ?? team.id,
       });
 
       if (!membersResponse.members) {
@@ -142,7 +142,7 @@ export const createSuddenMeeting = async (channel?: string) => {
             .map((user) => `<@${user}> さん`)
             .join("、")}\n\n突然ですが本日15時から雑談しませんか！？\n\n` +
           "時間になったらこのチャンネルのハドルに参加してください！！\n",
-        channel ?? SLACK_TARGET_CHANNEL
+        channel ?? team.id
       );
 
       // Instantiates a client.
@@ -153,7 +153,7 @@ export const createSuddenMeeting = async (channel?: string) => {
       const location = "us-central1";
       const url = "https://slack.com/api/chat.postMessage";
       const payload = {
-        channel: channel ?? SLACK_TARGET_CHANNEL,
+        channel: channel ?? team.id,
         text:
           `${targetUser
             .map((user) => `<@${user}> さん`)
