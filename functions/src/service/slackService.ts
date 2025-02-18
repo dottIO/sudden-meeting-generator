@@ -37,10 +37,10 @@ export const appMention = async (event: {
 }) => {
   functions.logger.info(event, { structuredData: true });
 
-  const { channel, text } = event;
+  const { team, channel, text } = event;
 
   if (text.includes("create")) {
     // 会議を作成する
-    await createSuddenMeeting(channel);
+    await createSuddenMeeting(team, channel);
   }
 };
