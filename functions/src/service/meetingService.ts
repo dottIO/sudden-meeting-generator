@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { CloudTasksClient, protos } from "@google-cloud/tasks";
 import { WebClient } from "@slack/web-api";
 import dayjs from "dayjs";

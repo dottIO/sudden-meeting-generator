@@ -1,8 +1,8 @@
-import { FieldValue, getFirestore } from "firebase-admin/firestore";
+import { DocumentData, FieldValue, getFirestore } from "firebase-admin/firestore";
 
 const firestore = getFirestore();
 
-export const setTeamInfo = async (teamId: string, info: any) => {
+export const setTeamInfo = async (teamId: string, info: Partial<DocumentData>) => {
   const teamRef = firestore.collection("teams").doc(teamId);
   await teamRef.set(info, { merge: true });
 };

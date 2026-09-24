@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable camelcase */
 import axios from "axios";
 import { logger } from "firebase-functions";
